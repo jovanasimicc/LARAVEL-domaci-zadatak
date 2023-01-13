@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\APICont;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\FrizerResource;
 use App\Models\Frizer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FrizerController extends Controller
 {
@@ -15,7 +17,10 @@ class FrizerController extends Controller
      */
     public function index()
     {
-        //
+
+        $svi_frizeri_db = DB::table('frizers')->get();
+
+        return FrizerResource::collection($svi_frizeri_db);
     }
 
     /**
@@ -45,9 +50,11 @@ class FrizerController extends Controller
      * @param  \App\Models\Frizer  $frizer
      * @return \Illuminate\Http\Response
      */
-    public function show(Frizer $frizer)
+    public function show($id)
     {
-        //
+        $frizer = DB::table('frizers')->where('id', $id)->first();
+
+        return new FrizerResource($frizer);
     }
 
     /**
