@@ -11,16 +11,13 @@ class Termin extends Model
 {
     use HasFactory;
 
-
     public function frizer()
     {
-
         return $this->belongsTo(Frizer::class);
     }
 
     public function musterija()
     {
-
         return $this->belongsTo(Musterija::class);
     }
 }

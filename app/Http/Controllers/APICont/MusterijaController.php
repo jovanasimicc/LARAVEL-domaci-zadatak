@@ -42,7 +42,6 @@ class MusterijaController extends Controller
      */
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'ime' => 'required',
             'prezime' => 'required',
@@ -50,11 +49,9 @@ class MusterijaController extends Controller
             'frizer_id' => 'required'
         ]);
 
-
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
-
 
         DB::table('musterijas')->insert([
             'ime' => $request->ime,
@@ -62,7 +59,6 @@ class MusterijaController extends Controller
             'broj_telefona' => $request->broj_telefona,
             'frizer_id' => $request->frizer_id
         ]);
-
 
         return response()->json('Musterija sacuvana');
     }

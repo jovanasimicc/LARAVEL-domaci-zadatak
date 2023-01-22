@@ -12,23 +12,17 @@ use App\Models\User;
 
 class ApiAuthController extends Controller
 {
-
-
     public function register(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|string',
         ]);
 
-
-
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
-
 
         $user_id = DB::table('users')->insertGetId([
             'name' => $request->name,
@@ -38,7 +32,6 @@ class ApiAuthController extends Controller
 
         $new_user = DB::table('users')->where('id', $user_id)->first();
 
-
         return response()->json($new_user);
     }
 
@@ -47,31 +40,22 @@ class ApiAuthController extends Controller
 
     public function login(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
-
-
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
-
 
         if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json('Login neuspesan');
         }
 
-
-
         $user = User::where('email', $request['email'])->firstOrFail();
 
-
         $login_token = $user->createToken('login_token')->plainTextToken;
-
-
 
         return response()->json([
             'User' => $user,

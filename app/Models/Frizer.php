@@ -11,18 +11,13 @@ class Frizer extends Model
 {
     use HasFactory;
 
-
-
     public function musterije()
     {
-
         return $this->hasMany(Musterija::class);
     }
 
-
     public function termini()
     {
-
         return $this->hasMany(Termin::class);
     }
 }

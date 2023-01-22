@@ -11,17 +11,13 @@ class Musterija extends Model
 {
     use HasFactory;
 
-
     public function frizer()
     {
-
         return $this->belongsTo(Frizer::class);
     }
 
-
     public function termini()
     {
-
         return $this->hasMany(Termin::class);
     }
 }
